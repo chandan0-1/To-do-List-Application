@@ -4,7 +4,8 @@ body{
 #heading{
   text-align: center;
   letter-spacing: 1px;
-  color:hsl(51, 91%, 44%);
+  color: rgb(180, 15, 78);
+  /* color:hsl(145, 87%, 30%); */
   font-family:Georgia;
   display: inline;;
 }
@@ -14,7 +15,7 @@ body{
   justify-content: center;
 }
 #main-container{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   background-color: white;
   width:35vw;
   height: 90vh;
@@ -22,7 +23,7 @@ body{
   margin-top: 3vw;
   border-radius: 2%;
   padding: 0vw 2vw;
-  box-shadow: 0 0 10px 2px rgb(117, 107, 107);
+  box-shadow: 0 0 20px 2px rgb(117, 107, 107);
 }
 
 #search-box-div{
@@ -115,12 +116,12 @@ body{
 }
 #tableList tr{
   margin-top:100px;
-  background-color: rgb(240, 231, 231);
+  background-color: rgb(243, 243, 243);
   border: none;
 }
 #task-name{
   color:aqua;
-  color: rgb(37, 146, 146);
+  color: rgb(15, 206, 132);
 
 }
 

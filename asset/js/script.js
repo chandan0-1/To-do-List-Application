@@ -22,7 +22,7 @@ submit.addEventListener("click", function(){
   showEvent();
 })
 
-
+// Showing the Data in the Browser
 function showEvent(){
     let task = localStorage.getItem("Tasks");
     if (task == null){
@@ -38,12 +38,32 @@ function showEvent(){
       content += `<tr>
       <td id="serial" colspan="8">${i+1}</th>
       <td id="task-name" colspan="10">${ item }</td>
-      <td> <button id="edit" > <i class="fas fa-pen control-icon"></i> Edit&nbsp</button></td>
+      <td> <button id="edit" onclick="editItem(${i})"> <i class="fas fa-pen control-icon"></i> Edit&nbsp</button></td>
       <td > <button id="delete" onclick="deleteItem(${i})"><i class="far fa-trash-alt control-icon"></i> Delete</button></td>
     </tr>`;
     });
     tableDataList.innerHTML = content;
 }
+
+function editItem(index){
+  let task = localStorage.getItem("Tasks");
+  let tempVal  = document.getElementById("search-box");
+  let taskObj = JSON.parse(task);
+  tempVal.value = taskObj[index];
+
+  let submittemp = document.getElementById("Submit");
+  submittemp.addEventListener("click", function(){
+    if (tempVal.value.trim().length > 0){
+      taskObj[index] = tempVal.value;
+      localStorage.setItem("Tasks", JSON.stringify(taskObj))
+    }
+    console.log("hello")
+    // tempVal.value = '';
+    showEvent();
+    
+  })
+}
+
 
 // Delete Box
 function deleteItem(index){
