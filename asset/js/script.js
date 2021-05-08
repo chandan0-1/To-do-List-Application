@@ -36,12 +36,20 @@ function showEvent(){
 
     taskObj.forEach((item, i) => {
       content += `<tr>
-      <th>${i+1}</th>
-      <td>${ item }</td>
-      <td>Edit</td>
-      <td>Delete</td>
+      <td id="serial" colspan="8">${i+1}</th>
+      <td id="task-name" colspan="10">${ item }</td>
+      <td> <a href="" id="edit" > <i class="fas fa-pen control-icon"></i> Edit</a></td>
+      <td > <a href="" id="delete" onclick="deleteItem(${i})"><i class="far fa-trash-alt control-icon"></i> Delete</a></td>
     </tr>`;
     });
     tableDataList.innerHTML = content;
 }
 
+// Delete Box
+function deleteItem(index){
+  let task = localStorage.getItem("Tasks");
+  let taskObj = JSON.parse(task);
+  taskObj.splice(index,1);
+  localStorage.setItem("Tasks", JSON.stringify(taskObj));
+  showEvent();
+}
