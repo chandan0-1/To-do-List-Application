@@ -6,7 +6,7 @@ body{
   letter-spacing: 1px;
   color:hsl(51, 91%, 44%);
   font-family:Georgia;
-  display: inline;
+  display: inline;;
 }
 #header{
   display: flex;
@@ -22,6 +22,7 @@ body{
   margin-top: 3vw;
   border-radius: 2%;
   padding: 0vw 2vw;
+  box-shadow: 0 0 10px 2px rgb(117, 107, 107);
 }
 
 #search-box-div{
@@ -98,7 +99,13 @@ body{
   position: relative;
   margin: 1vh 0;
   height: 60%;
+  overflow-y: scroll;
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none;
   background-color: rgb(226, 214, 214);
+}
+#display::-webkit-scrollbar {
+  display: none;
 }
 
 /* Display Table */
@@ -118,7 +125,7 @@ body{
 }
 
 .control-icon{
-  font-size: 0.7rem;
+  font-size: 0.5rem;
 }
 
 #serial{
@@ -126,12 +133,23 @@ body{
   font-size: 1rem;
 }
 #edit{
+  cursor: pointer;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color:midnightblue;
 }
+#edit:hover{
+  color: white;
+  background-color: midnightblue;
+}
 #delete{
+  font-size: 0.8rem;
+  cursor: pointer;
   text-decoration: none;
-  font-size: 1rem;
+  /* font-size: 1rem; */
   color:red;
+}
+#delete:hover{
+  color: white;
+  background-color: red;
 }
