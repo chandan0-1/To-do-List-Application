@@ -11,41 +11,26 @@
 
   <div id="main-container">
     <div id="header">
-      <img id="logo" src="./asset/image/logo.svg" alt="">
+      <img id="logo" src="./asset/image/pen.svg" alt="">
       <h1 id="heading"> &nbspTo do List</h2>
     </div>
       
     <div id="search-box-div">
-      <img src="./asset/image/search-icon.svg" alt="">
+      <img src="./asset/image/logo.svg" alt="">
       <input id="search-box" type="text" placeholder="Enter your Task">
       <!-- <input id="submit" type="submit"> -->
       <button type="submit" id="Submit">Submit</button>
     </div>
 
     <div id="event-action">
-      <a href=""><i class="fas fa-check"> </i> Complete all Tasks</a>
-      <a href="">Clear Completed</a>
+      <button id="complete-all">Complete all Tasks <i class="fas fa-check"></i> </button>
+      <button id="clear-all">Clear All <i class="fas fa-times"></i> </button>
     </div>
 
     <!-- Event Item display in below Div -->
     <div id="display">
       <table id="tableList">
-
-        
-        <tr>
-          <div class="data-items">
-            <th colspan="5" >10</th>
-            <td id="task-name" colspan="5">Task</td>
-          </div>
-          
-          <div id="data-operations">
-            <td>Edit</td>
-            <td>Delete</td>
-          </div>
-
-        </tr>
-
-
+        <!-- content of the table is bring displyed from js file -->
       </table>
 
 
@@ -54,13 +39,13 @@
 
     <div id="footer">
       <div> 
-        <span>3 Task left</span> 
+        <span id="size">0 Tasks left</span> 
       </div>
 
       <div id="status">
-        <a href="">All</a>
-        <a href="">UnComplete</a>
-        <a href="">Completed</a>
+        <a style="color:rgb(22, 20, 20)" href="#">All</a>
+        <a style="color:grey" href="#">Incomplete</a>
+        <a style="color:grey" href="#">Completed</a>
       </div>
     </div>
 

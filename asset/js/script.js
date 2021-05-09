@@ -4,8 +4,7 @@ showEvent();
 
 submit.addEventListener("click", function(){
   Data = searchBox.value; 
-  
-  console.log(Data.length);
+
   if (Data.trim().length > 0){
     let task = localStorage.getItem("Tasks");
     if (task == null){
@@ -19,7 +18,10 @@ submit.addEventListener("click", function(){
     taskObj.push(Data);
   }
   localStorage.setItem("Tasks", JSON.stringify(taskObj));//since everting converted to the string in the local storage
+  // searchBox.value = "";
+  
   showEvent();
+  showSize();
 })
 
 // Showing the Data in the Browser
@@ -60,6 +62,7 @@ function editItem(index){
     console.log("hello")
     // tempVal.value = '';
     showEvent();
+    showSize();
     
   })
 }
@@ -72,4 +75,29 @@ function deleteItem(index){
   taskObj.splice(index,1);
   localStorage.setItem("Tasks", JSON.stringify(taskObj));
   showEvent();
+  showSize();
 }
+
+function showSize(){
+  let totalSize = document.getElementById("size")
+  totalSize.innerHTML = taskObj.length +" Tasks left";
+}
+
+
+let clearButton = document.getElementById("clear-all");
+clearButton.addEventListener("click",function(){
+  localStorage.clear();
+  showEvent();
+  showSize();
+})
+
+let completeButton = document.getElementById("complete-all");
+completeButton.addEventListener("click",function(){
+  let td = document.getElementsByTagName("td")
+  let s = document.getElementById("serial");
+  let t = document.getElementById("display");
+  t.style.opacity = "0.4";
+  t.style.backgroundColor = "darkgrey";
+  showEvent();
+  showSize();
+})
