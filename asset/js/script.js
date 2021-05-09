@@ -1,6 +1,7 @@
 let searchBox = document.getElementById("search-box");
 let submit = document.getElementById("Submit");
 showEvent();
+showSize();
 
 submit.addEventListener("click", function(){
   Data = searchBox.value; 
