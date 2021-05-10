@@ -19,11 +19,12 @@ submit.addEventListener("click", function(){
     taskObj.push(Data);
   }
   localStorage.setItem("Tasks", JSON.stringify(taskObj));//since everting converted to the string in the local storage
-  // searchBox.value = "";
   
   showEvent();
   showSize();
 })
+
+
 
 // Showing the Data in the Browser
 function showEvent(){
@@ -48,28 +49,45 @@ function showEvent(){
     tableDataList.innerHTML = content;
 }
 
-function editItem(index){
-  let task = localStorage.getItem("Tasks");
-  let tempVal  = document.getElementById("search-box");
-  let taskObj = JSON.parse(task);
-  tempVal.value = taskObj[index];
 
-  let submittemp = document.getElementById("Submit");
-  submittemp.addEventListener("click", function(){
-    if (tempVal.value.trim().length > 0){
-      taskObj[index] = tempVal.value;
-      localStorage.setItem("Tasks", JSON.stringify(taskObj))
-    }
-    console.log("hello")
-    // tempVal.value = '';
-    showEvent();
-    showSize();
-    
-  })
+// to edit the existing task
+function editItem(index){
+  let saveIndex = document.getElementById("saveindex");
+  let submitbtn = document.getElementById("Submit");
+  let savebtn = document.getElementById("Savebtn");
+
+  saveIndex.value = index;
+
+  let task = localStorage.getItem("Tasks");
+  let taskObj = JSON.parse(task);
+  let searchBox  = document.getElementById("search-box");
+  searchBox.value = taskObj[index];
+  
+  submitbtn.style.display = "none";
+  savebtn.style.display = "block";
 }
 
 
-// Delete Box
+let savebtn = document.getElementById("Savebtn");
+savebtn.addEventListener("click", function () {
+
+  let submitbtn = document.getElementById("Submit");
+  let task = localStorage.getItem("Tasks");
+  let taskObj = JSON.parse(task);
+  let saveIndex = document.getElementById("saveindex").value;
+  taskObj[saveIndex] = searchBox.value;
+
+  submitbtn.style.display = "block";
+  savebtn.style.display = "none";
+  searchBox.value = '';
+  localStorage.setItem("Tasks", JSON.stringify(taskObj));//since everting converted to the string in the local storage
+  showEvent();
+  showSize();
+})
+
+
+
+// Deleting a task
 function deleteItem(index){
   let task = localStorage.getItem("Tasks");
   let taskObj = JSON.parse(task);
@@ -79,12 +97,13 @@ function deleteItem(index){
   showSize();
 }
 
+// showing the size
 function showSize(){
   let totalSize = document.getElementById("size")
   totalSize.innerHTML = taskObj.length +" Tasks left";
 }
 
-
+// clear Button
 let clearButton = document.getElementById("clear-all");
 clearButton.addEventListener("click",function(){
   localStorage.clear();
@@ -92,6 +111,7 @@ clearButton.addEventListener("click",function(){
   showSize();
 })
 
+// complete all button
 let completeButton = document.getElementById("complete-all");
 completeButton.addEventListener("click",function(){
   let td = document.getElementsByTagName("td")
