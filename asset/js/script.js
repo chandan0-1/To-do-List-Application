@@ -3,15 +3,15 @@ let submit = document.getElementById("Submit");
 showEvent();
 showSize();
 
-submit.addEventListener("click", function(){
-  Data = searchBox.value; 
+submit.addEventListener("click", function () {
+  Data = searchBox.value;
 
-  if (Data.trim().length > 0){
+  if (Data.trim().length > 0) {
     let task = localStorage.getItem("Tasks");
-    if (task == null){
+    if (task == null) {
       taskObj = [];
     }
-    else{
+    else {
       taskObj = JSON.parse(task)//converting to the Obj so that 
       // can apply various method because in the local storage
       // everthing stored as string
@@ -19,7 +19,7 @@ submit.addEventListener("click", function(){
     taskObj.push(Data);
   }
   localStorage.setItem("Tasks", JSON.stringify(taskObj));//since everting converted to the string in the local storage
-  
+  searchBox.value = '';
   showEvent();
   showSize();
 })
@@ -27,31 +27,32 @@ submit.addEventListener("click", function(){
 
 
 // Showing the Data in the Browser
-function showEvent(){
-    let task = localStorage.getItem("Tasks");
-    if (task == null){
-      taskObj = [];
-    }
-    else{
-      taskObj = JSON.parse(task);
-    }
-    let content = "";
-    let tableDataList = document.getElementById("tableList");
+function showEvent() {
+  let task = localStorage.getItem("Tasks");
+  if (task == null) {
+    taskObj = [];
+  }
+  else {
+    taskObj = JSON.parse(task);
+  }
+  let content = "";
+  let tableDataList = document.getElementById("tableList");
 
-    taskObj.forEach((item, i) => {
-      content += `<tr>
-      <td id="serial" colspan="8">${i+1}</th>
-      <td id="task-name" colspan="10">${ item }</td>
+  taskObj.forEach((item, i) => {
+    content += `<tr>
+      <td id="serial" colspan="8">${i + 1}</th>
+      <td id="task-name" colspan="10">${item}</td>
       <td> <button id="edit" onclick="editItem(${i})"> <i class="fas fa-pen control-icon"></i> Edit&nbsp</button></td>
       <td > <button id="delete" onclick="deleteItem(${i})"><i class="far fa-trash-alt control-icon"></i> Delete</button></td>
     </tr>`;
-    });
-    tableDataList.innerHTML = content;
+  });
+  tableDataList.innerHTML = content;
+
 }
 
 
 // to edit the existing task
-function editItem(index){
+function editItem(index) {
   let saveIndex = document.getElementById("saveindex");
   let submitbtn = document.getElementById("Submit");
   let savebtn = document.getElementById("Savebtn");
@@ -60,9 +61,9 @@ function editItem(index){
 
   let task = localStorage.getItem("Tasks");
   let taskObj = JSON.parse(task);
-  let searchBox  = document.getElementById("search-box");
+  let searchBox = document.getElementById("search-box");
   searchBox.value = taskObj[index];
-  
+
   submitbtn.style.display = "none";
   savebtn.style.display = "block";
 }
@@ -88,37 +89,45 @@ savebtn.addEventListener("click", function () {
 
 
 // Deleting a task
-function deleteItem(index){
+function deleteItem(index) {
   let task = localStorage.getItem("Tasks");
   let taskObj = JSON.parse(task);
-  taskObj.splice(index,1);
+  taskObj.splice(index, 1);
   localStorage.setItem("Tasks", JSON.stringify(taskObj));
   showEvent();
   showSize();
 }
 
 // showing the size
-function showSize(){
+function showSize() {
   let totalSize = document.getElementById("size")
-  totalSize.innerHTML = taskObj.length +" Tasks left";
+  totalSize.innerHTML = taskObj.length + " Tasks left";
 }
 
 // clear Button
 let clearButton = document.getElementById("clear-all");
-clearButton.addEventListener("click",function(){
+clearButton.addEventListener("click", function () {
   localStorage.clear();
   showEvent();
   showSize();
 })
 
+let temp = 0;
 // complete all button
 let completeButton = document.getElementById("complete-all");
-completeButton.addEventListener("click",function(){
+completeButton.addEventListener("click", function () {
   let td = document.getElementsByTagName("td")
   let s = document.getElementById("serial");
   let t = document.getElementById("display");
-  t.style.opacity = "0.4";
-  t.style.backgroundColor = "darkgrey";
+  if (temp == 0) {
+    t.style.opacity = "0.4";
+    t.style.backgroundColor = "lightgrey";
+    temp = 1
+  } else {
+    t.style.opacity = "1";
+    t.style.backgroundColor = "lightgrey";
+    temp = 0
+  }
   showEvent();
   showSize();
 })
